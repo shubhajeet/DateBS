@@ -1,0 +1,24 @@
+{
+  "name": "datebs",
+  "version": "0.0.1",
+  "description": "library to convert date from BS to AD and vice versa.",
+  "main": "DateBS/DateBS.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shubhajeet/DateBS.git"
+  },
+  "keywords": [
+    "BS",
+    "Date"
+  ],
+  "author": "Sujit Maharjan",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/shubhajeet/DateBS/issues"
+  },
+  "homepage": "https://github.com/shubhajeet/DateBS#readme"
+}

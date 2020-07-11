@@ -26,8 +26,8 @@ function testGetYear() {
 
 function today()
 {
-  dateBS = new DateBS();
-  console.log(dateBS.fromAD());
+  dateBS = DateBS.fromAD();
+  console.log(dateBS);
   console.log(dateBS.toAD());
 }
 

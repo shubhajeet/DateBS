@@ -1,4 +1,4 @@
-BSMonths = [[ 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31 ],  //2000
+const BSMonths : Array<Array<number>> = [[ 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31 ],  //2000
 		[ 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30 ],  //2001
 		[ 31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30 ],
 		[ 31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31 ],
@@ -100,50 +100,56 @@ BSMonths = [[ 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31 ],  //2000
 		[ 31, 31, 32, 31, 31, 31, 30, 29, 29, 30, 30, 30 ]   //2099
                     ];
 
-class DateBS{
-    constructor(year,month,day)
+export class DateBS{
+    year: number
+    month: number
+    day: number
+    constructor(year: number  , month:number ,day:number)
     {
         this.year = year;
         this.month = month;
         this.day = day;
-        this.startingDateAD = new Date("1944-01-01T00:00");
-        this.startingDateBS = {
+        //this.startingDateAD = new Date("1944-01-01T00:00");
+        /*
+          this.startingDateBS = {
             "year": 2000,
             "month": 9,
             "day": 17,
         };
+        */
+        return this;
     }
     
-    static fromString(datestring)
+    static fromString(datestring: string): DateBS
     {
-      let info = datestring.match(/(\d+)-(\d+)-(\d+)/);
-      return new DateBS(parseInt(info[1]),parseInt(info[2]),parseInt(info[3]));
+        let info: any  = datestring.match(/(\d+)-(\d+)-(\d+)/);
+        return new DateBS(parseInt(info[1]),parseInt(info[2]),parseInt(info[3]));
     }
-    
-    toString()
+
+    toString(): string
     {
       return (this.year + "-" + this.month + "-" + this.day);
     }
     
-    dayOfYear()
+    dayOfYear() : number
     {
-        let months = this.monthsInYear();
+        let months: Array<number>  = this.monthsInYear();
         return months.slice(0,this.month-1).reduce( (sum,daysInMonth) => sum = sum+daysInMonth,0) + this.day;
     }
     
-    dayInYear()
+    daysInYear() : number
     {
-        return DateBS.dayInYear(this.year);
+        return DateBS.daysInYear(this.year);
     }
     
-    static daysInYear(year)
+    static daysInYear(year: number): number
     {
-        return DateBS.monthsInYear(year).reduce( (sum,daysInMonth) => sum = sum+daysInMonth,0);
+        return DateBS.monthsInYear(year).reduce( (sum:number,daysInMonth:number) => sum = sum+daysInMonth,0);
     }
     
-    daysSince(date = new DateBS(2000,9,17) )
+    daysSince(date: DateBS = new DateBS(2000,9,17) ) : number
     {
-        let days = 0;
+        let days:number = 0;
         for (let year = date.year; year < this.year; year++)
         {
             days += DateBS.daysInYear(year);
@@ -152,16 +158,16 @@ class DateBS{
         return days;     
     }
     
-    add(day,month=0,year=0)
+    add(day:number ,month: number =0,year: number =0) : DateBS
     {
         this.month += month;
         this.year += (year + Math.floor(this.month / 12));
         this.month = (this.month % 12);
-        let diff = day;
+        let diff:number = day;
         while (diff > 0)
         {
-            let daysInMonth = this.daysInMonth(this.year,this.month);
-            let daysLeft = daysInMonth - this.day + 1;
+            let daysInMonth: number = this.daysInMonth();
+            let daysLeft: number = daysInMonth - this.day + 1;
             if (diff > daysLeft)
             {
                 if ( this.month === 12 )
@@ -186,49 +192,49 @@ class DateBS{
         return this;
     }
     
-    toAD()
+    toAD(): Date
     {
-        let startingDateAD = new Date("1944-01-01T00:00");
+        let startingDateAD: Date = new Date("1944-01-01T00:00");
         startingDateAD.setDate(1+this.daysSince());
         return startingDateAD;
     }
     
-    static fromAD(date=new Date())
+    static fromAD(date: Date =new Date()): DateBS
     {
-        let startingDateAD = new Date("1944-01-01T00:00");
+        let startingDateAD: Date  = new Date("1944-01-01T00:00");
         let diff = DateBS.daysDiff(date,startingDateAD);
         let startingDateBS = new DateBS(2000,9,17);;
         startingDateBS.add(diff);
         return startingDateBS;
     }
     
-    static daysDiff(a,b)
+    static daysDiff(a:any, b:any): number
     {
-        let before = new Date("2020-07-01");
-        let after = new Date("2020-07-02");
+        let before: any  = new Date("2020-07-01");
+        let after: any  = new Date("2020-07-02");
         return Math.floor((a-b)/(after-before));
     }
     
-    monthsInYear()
+    monthsInYear(): any 
     {
         return DateBS.monthsInYear(this.year);
     }
 
-    static monthsInYear(year)
+    static monthsInYear(year:number): any
     {
-        let yearIndex = year - 2000;
+        let yearIndex: number = year - 2000;
         if (yearIndex >= 0 )
         {
             return BSMonths[yearIndex];
         }
     }
 
-    daysInMonth()
+    daysInMonth(): number
     {
         return DateBS.daysInMonth(this.year,this.month);
     }
     
-    static daysInMonth(year,month)
+    static daysInMonth(year:number ,month:number ): number
     {
         return DateBS.monthsInYear(year)[month-1];
     }
