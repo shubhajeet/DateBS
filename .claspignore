@@ -1,0 +1,7 @@
+testDeno.js
+package*.json
+tsconfig.json
+node_modules
+node_modules/**/*
+lib
+lib/**/*
