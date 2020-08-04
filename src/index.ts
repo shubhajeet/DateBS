@@ -238,5 +238,50 @@ export class DateBS{
     {
         return DateBS.monthsInYear(year)[month-1];
     }
-    
+
+    monthInString(): string
+    {
+        let monthBS = [ "Baishakh",
+                        "Jestha",
+                        "Ashadh",
+                        "Shrawan",
+                        "Bhadra",
+                        "Ashwin",
+                        "Kartik",
+                        "Mangsir",
+                        "Poush",
+                        "Magh",
+                        "Falgun",
+                        "Chaitra"
+                      ];
+        return monthBS[this.month];
+    }
+
+    monthInStringNepali(): string
+    {
+        let monthBS = [ "वैशाख",
+                        "ज्येष्ठ",
+                        "असार",
+                        "साउन",
+                        "भदौ",
+                        "असोज",
+                        "कात्तिक",
+                        "मंसिर",
+                        "पुष",
+                        "माघ",
+                        "फागुन",
+                        "चैत"
+                  ];
+        return monthBS[this.month];
+    }
+
+    financialYear(): string
+    {
+        if ( this.month > 3){
+            return this.year + "/" + (this.year % 100 + 1);
+        }
+        else {
+            return (this.year-1) + "/" + (this.year % 100);
+        }
+    }
 }
