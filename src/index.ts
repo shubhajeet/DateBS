@@ -168,7 +168,7 @@ export class DateBS{
         {
             let daysInMonth: number = this.daysInMonth();
             let daysLeft: number = daysInMonth - this.day + 1;
-            if (diff > daysLeft)
+            if (diff >= daysLeft)
             {
                 if ( this.month === 12 )
                 {
@@ -254,7 +254,7 @@ export class DateBS{
                         "Falgun",
                         "Chaitra"
                       ];
-        return monthBS[this.month];
+        return monthBS[this.month-1];
     }
 
     monthInStringNepali(): string
@@ -272,7 +272,7 @@ export class DateBS{
                         "फागुन",
                         "चैत"
                   ];
-        return monthBS[this.month];
+        return monthBS[this.month-1];
     }
 
     financialYear(): string

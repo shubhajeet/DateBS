@@ -29,6 +29,7 @@ function today()
   dateBS = DateBS.fromAD();
   console.log(dateBS);
   console.log(dateBS.toAD());
+    console.log(dateBS.financialYear());
 }
 
 function testServer()
@@ -40,4 +41,19 @@ function testServer()
   request = createGetRequest(data);
   //console.log(request);
   console.log(doGet(request));
+}
+
+function testtoAD()
+{
+  console.log(DateToAD("2077-03-30"))
+}
+
+function testtoBS()
+{
+  console.log(DateToBS("2020-07-01"))
+}
+
+function testUserInfo()
+{
+console.log(Session.getActiveUser().getEmail());
 }
